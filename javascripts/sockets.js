@@ -1,13 +1,13 @@
-
 //app
 $(document).ready(function() {
   var socket = new SocketParty();
 
   socket.openSocket();
-
+  socket.bind('server_message', function(message){$('#messages').append('<p>' + message + '</p>');});
+  //socket.bind('user_connected', function(message){$('#messages').append('<p>userconnected</p>');});
   socket.bind('text_message', function(message, type, sender){$('#messages').append('<p>' + message + ' (' + type + ' from ' + sender +') </p>');}, 'broadcast');
   socket.bind('box_moved', function(pos, type, sender){$('.draggable').css({top: pos.top , left: pos.left})}, 'broadcast');
-
+  
   //app specific
   $('.draggable').draggable({ drag: function(event, ui) {
     socket.send('box_moved', ui.position, 'broadcast');

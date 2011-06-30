@@ -22,7 +22,7 @@
     this.mysocket = new WebSocket("ws://192.168.5.170:1225");
     this.mysocket._parent = this;
 
-    this.bind('server_message', function(message){$('#messages').append('<p>' + message + '</p>');});
+    
 
     this.mysocket.onopen = function(evt) {
       this._parent.router['server_message'].dispatch('onopen triggered');

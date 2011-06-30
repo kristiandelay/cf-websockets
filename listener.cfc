@@ -15,19 +15,19 @@
   <cffunction name="onClientOpen">
     <cfargument name="event" />
     <cfset var msg = {} />
-    <cfset a = StructInsert(packet, "data", "Connected to the WS server", 1)/>
+
+    <cfset a = StructInsert(packet, "data", "User Connected", 1)/>
     <cfset a = StructInsert(packet, "sender", event.originatorID, 1)/> 
 
     <cfset outgoingPacket = SerializeJSON(packet)>
-
     <cfset msg["MESSAGE"] = outgoingPacket />
-    <cfset msg["DESTINATIONWEBSOCKETID"] = event.originatorID />
     <cfreturn msg/>
   </cffunction>
 
   <cffunction name="onIncomingMessage">
     <cfargument name="event" />
     <cfset var msg = {} />
+
     <cfset incomingPacket = DeserializeJSON(event.data.message)>
     <cfset a = StructInsert(incomingPacket, "type", incomingPacket.type, 1)/> 
     <cfset a = StructInsert(incomingPacket, "sender", event.originatorID, 1)/> 
@@ -48,7 +48,9 @@
   <cffunction name="onClientClose">
     <cfargument name="event" />
     <cfset var msg = {} />
+
 	<cfset a = StructInsert(packet, "data", "A User Has Left :(", 1)/>
+
     <cfset outgoingPacket = SerializeJSON(packet)>
     <cfset msg["MESSAGE"] = outgoingPacket />
 	<cfreturn msg />
