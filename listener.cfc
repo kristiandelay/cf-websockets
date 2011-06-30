@@ -49,7 +49,6 @@
     <cfargument name="event" />
     <cfset var msg = {} />
 	<cfset a = StructInsert(packet, "data", "A User Has Left :(", 1)/>
-
     <cfset outgoingPacket = SerializeJSON(packet)>
     <cfset msg["MESSAGE"] = outgoingPacket />
 	<cfreturn msg />
