@@ -5,16 +5,16 @@ $(document).ready(function() {
 
   socket.openSocket();
 
-  socket.bind('text_message', function(message){$('#messages').append('<p>' + message + '</p>');});
-  socket.bind('box_moved', function(pos){$('.draggable').css({top: pos.top , left: pos.left})});
+  socket.bind('text_message', function(message, type, sender){$('#messages').append('<p>' + message + ' (' + type + ' from ' + sender +') </p>');}, 'broadcast');
+  socket.bind('box_moved', function(pos, type, sender){$('.draggable').css({top: pos.top , left: pos.left})}, 'broadcast');
 
   //app specific
   $('.draggable').draggable({ drag: function(event, ui) {
-    socket.transmit('box_moved', ui.position);
+    socket.send('box_moved', ui.position, 'broadcast');
   }});
   
   var sendChatMessage = function() {
-    socket.transmit('text_message', $('#newMessage').val());
+    socket.send('text_message', $('#newMessage').val(), $('#newMessageType').val());
     $('#newMessage').val('');
   };
 

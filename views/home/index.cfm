@@ -1,8 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  
-<script src="http://cdn.socket.io/stable/socket.io.js"></script>
+
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
@@ -18,10 +17,10 @@
   <br/>
   Priority
   <select id="newMessageType">
-    <option>None</option>
-    <option>Low</option>
-    <option>Medium</option>
-    <option>High</option>
+    <option>BROADCAST</option>
+    <option>RELAY</option>
+    <option>PING</option>
+    <option>TOSERVER</option>
   </select>
   <input type="text" id="newMessage"/>
   <br/>
